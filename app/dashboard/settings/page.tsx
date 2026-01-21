@@ -173,7 +173,7 @@ export default function SettingsPage() {
                       <button 
                         className="px-4 py-2 text-sm font-medium"
                         style={{ 
-                          backgroundColor: designTokens.colors.background.secondary,
+                          backgroundColor: designTokens.colors.background.muted,
                           borderRadius: designTokens.borderRadius.lg,
                           color: designTokens.colors.text.primary,
                         }}
@@ -300,7 +300,7 @@ export default function SettingsPage() {
                           <div 
                             key={cat.id}
                             className="flex items-center justify-between p-3 rounded-lg"
-                            style={{ backgroundColor: designTokens.colors.background.secondary }}
+                            style={{ backgroundColor: designTokens.colors.background.muted }}
                           >
                             <div className="flex items-center gap-3">
                               <div 
@@ -315,10 +315,10 @@ export default function SettingsPage() {
                             </div>
                             <div className="flex items-center gap-2">
                               <button className="p-2 rounded-lg hover:bg-gray-200">
-                                <Edit2 size={16} style={{ color: designTokens.colors.text.tertiary }} />
+                                <Edit2 size={16} style={{ color: designTokens.colors.text.muted }} />
                               </button>
                               <button className="p-2 rounded-lg hover:bg-gray-200">
-                                <Trash2 size={16} style={{ color: designTokens.colors.text.tertiary }} />
+                                <Trash2 size={16} style={{ color: designTokens.colors.text.muted }} />
                               </button>
                             </div>
                           </div>
@@ -342,7 +342,7 @@ export default function SettingsPage() {
                           <div 
                             key={cat.id}
                             className="flex items-center justify-between p-3 rounded-lg"
-                            style={{ backgroundColor: designTokens.colors.background.secondary }}
+                            style={{ backgroundColor: designTokens.colors.background.muted }}
                           >
                             <div className="flex items-center gap-3">
                               <div 
@@ -357,10 +357,10 @@ export default function SettingsPage() {
                             </div>
                             <div className="flex items-center gap-2">
                               <button className="p-2 rounded-lg hover:bg-gray-200">
-                                <Edit2 size={16} style={{ color: designTokens.colors.text.tertiary }} />
+                                <Edit2 size={16} style={{ color: designTokens.colors.text.muted }} />
                               </button>
                               <button className="p-2 rounded-lg hover:bg-gray-200">
-                                <Trash2 size={16} style={{ color: designTokens.colors.text.tertiary }} />
+                                <Trash2 size={16} style={{ color: designTokens.colors.text.muted }} />
                               </button>
                             </div>
                           </div>
@@ -399,7 +399,7 @@ export default function SettingsPage() {
                         style={{ 
                           backgroundColor: selectedCurrency === curr.code 
                             ? `${designTokens.colors.brand.primary}15`
-                            : designTokens.colors.background.secondary,
+                            : designTokens.colors.background.muted,
                           border: selectedCurrency === curr.code 
                             ? `2px solid ${designTokens.colors.brand.primary}`
                             : '2px solid transparent',
@@ -465,7 +465,7 @@ export default function SettingsPage() {
                       <div 
                         key={item.key}
                         className="flex items-center justify-between p-4 rounded-lg"
-                        style={{ backgroundColor: designTokens.colors.background.secondary }}
+                        style={{ backgroundColor: designTokens.colors.background.muted }}
                       >
                         <div>
                           <p 
@@ -547,7 +547,7 @@ export default function SettingsPage() {
                             Экспорт в {format}
                           </span>
                         </div>
-                        <ChevronRight size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                        <ChevronRight size={18} style={{ color: designTokens.colors.text.muted }} />
                       </button>
                     ))}
                   </div>
@@ -577,7 +577,7 @@ export default function SettingsPage() {
                     className="border-2 border-dashed rounded-xl p-10 text-center"
                     style={{ borderColor: designTokens.colors.border.light }}
                   >
-                    <Upload size={48} className="mx-auto mb-4" style={{ color: designTokens.colors.text.tertiary }} />
+                    <Upload size={48} className="mx-auto mb-4" style={{ color: designTokens.colors.text.muted }} />
                     <p 
                       className="font-medium mb-2"
                       style={{ color: designTokens.colors.text.primary }}
@@ -592,7 +592,7 @@ export default function SettingsPage() {
                     </p>
                     <p 
                       className="text-xs"
-                      style={{ color: designTokens.colors.text.tertiary }}
+                      style={{ color: designTokens.colors.text.muted }}
                     >
                       Поддерживаемые форматы: CSV, Excel, JSON
                     </p>
@@ -632,7 +632,7 @@ export default function SettingsPage() {
                         style={{ 
                           backgroundColor: theme === t.id 
                             ? `${designTokens.colors.brand.primary}15`
-                            : designTokens.colors.background.secondary,
+                            : designTokens.colors.background.muted,
                           border: theme === t.id 
                             ? `2px solid ${designTokens.colors.brand.primary}`
                             : '2px solid transparent',

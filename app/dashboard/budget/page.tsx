@@ -329,7 +329,7 @@ export default function BudgetPage() {
                       {/* Progress Bar */}
                       <div 
                         className="w-full h-2 rounded-full overflow-hidden"
-                        style={{ backgroundColor: designTokens.colors.background.secondary }}
+                        style={{ backgroundColor: designTokens.colors.background.muted }}
                       >
                         <div 
                           className="h-full rounded-full transition-all"
@@ -346,7 +346,7 @@ export default function BudgetPage() {
                       <div className="flex items-center justify-between mt-2">
                         <p 
                           className="text-sm"
-                          style={{ color: designTokens.colors.text.tertiary }}
+                          style={{ color: designTokens.colors.text.muted }}
                         >
                           {Math.round(progress)}% использовано
                         </p>
@@ -369,7 +369,7 @@ export default function BudgetPage() {
                       className="p-2 rounded-lg hover:bg-gray-100 flex-shrink-0"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <Edit2 size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                      <Edit2 size={18} style={{ color: designTokens.colors.text.muted }} />
                     </button>
                   </div>
                 );

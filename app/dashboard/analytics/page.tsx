@@ -284,7 +284,7 @@ export default function AnalyticsPage() {
                     </div>
                     <span 
                       className="text-xs"
-                      style={{ color: designTokens.colors.text.tertiary }}
+                      style={{ color: designTokens.colors.text.muted }}
                     >
                       {data.month}
                     </span>
@@ -393,7 +393,7 @@ export default function AnalyticsPage() {
                 <div 
                   key={index}
                   className="flex items-center justify-between p-3 rounded-lg"
-                  style={{ backgroundColor: designTokens.colors.background.secondary }}
+                  style={{ backgroundColor: designTokens.colors.background.muted }}
                 >
                   <div className="flex items-center gap-4">
                     <div 

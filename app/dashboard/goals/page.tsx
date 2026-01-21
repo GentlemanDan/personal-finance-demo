@@ -243,7 +243,7 @@ export default function GoalsPage() {
                       className="p-1 rounded-lg hover:bg-gray-100"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <MoreVertical size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                      <MoreVertical size={18} style={{ color: designTokens.colors.text.muted }} />
                     </button>
                   </div>
 
@@ -260,7 +260,7 @@ export default function GoalsPage() {
                   {/* Progress Bar */}
                   <div 
                     className="w-full h-2 rounded-full mb-3"
-                    style={{ backgroundColor: designTokens.colors.background.secondary }}
+                    style={{ backgroundColor: designTokens.colors.background.muted }}
                   >
                     <div 
                       className="h-full rounded-full transition-all"
@@ -293,13 +293,13 @@ export default function GoalsPage() {
                     style={{ borderColor: designTokens.colors.border.light }}
                   >
                     <div className="flex items-center gap-1">
-                      <Calendar size={14} style={{ color: designTokens.colors.text.tertiary }} />
+                      <Calendar size={14} style={{ color: designTokens.colors.text.muted }} />
                       <span style={{ color: designTokens.colors.text.secondary }}>
                         {daysLeft !== null ? `${daysLeft} дн.` : 'Без срока'}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <TrendingUp size={14} style={{ color: designTokens.colors.text.tertiary }} />
+                      <TrendingUp size={14} style={{ color: designTokens.colors.text.muted }} />
                       <span style={{ color: designTokens.colors.text.secondary }}>
                         {progress}%
                       </span>
@@ -340,9 +340,9 @@ export default function GoalsPage() {
             >
               <div 
                 className="p-3 rounded-full mb-3"
-                style={{ backgroundColor: designTokens.colors.background.secondary }}
+                style={{ backgroundColor: designTokens.colors.background.muted }}
               >
-                <Plus size={24} style={{ color: designTokens.colors.text.tertiary }} />
+                <Plus size={24} style={{ color: designTokens.colors.text.muted }} />
               </div>
               <p 
                 className="font-medium"
@@ -383,7 +383,7 @@ export default function GoalsPage() {
                     <div 
                       key={goal.id}
                       className="flex items-center justify-between p-3 rounded-lg"
-                      style={{ backgroundColor: designTokens.colors.background.secondary }}
+                      style={{ backgroundColor: designTokens.colors.background.muted }}
                     >
                       <div className="flex items-center gap-3">
                         <div 
@@ -452,7 +452,7 @@ export default function GoalsPage() {
                 Новая цель
               </h2>
               <button onClick={() => setShowAddModal(false)}>
-                <X size={20} style={{ color: designTokens.colors.text.tertiary }} />
+                <X size={20} style={{ color: designTokens.colors.text.muted }} />
               </button>
             </div>
 

@@ -21,6 +21,16 @@ import { designTokens } from '@/lib/design-tokens';
 
 const { overview, categories, greeting, accounts, currency } = translations;
 
+// Типы для транзакций
+type Transaction = {
+  id: number;
+  title: string;
+  category: string;
+  amount: number;
+  date: string;
+  type: 'income' | 'expense';
+};
+
 // Моковые данные
 const initialAccounts = [
   { id: 1, name: 'Основная карта', type: 'card', balance: 156420, icon: CreditCard, color: '#10b981' },
@@ -28,12 +38,12 @@ const initialAccounts = [
   { id: 3, name: 'Накопительный', type: 'deposit', balance: 450000, icon: PiggyBank, color: '#8b5cf6' },
 ];
 
-const initialTransactions = [
-  { id: 1, title: 'Пятёрочка', category: categories.food, amount: -1850, date: 'Сегодня, 14:32', type: 'expense' as const },
-  { id: 2, title: 'Зарплата', category: categories.salary, amount: 95000, date: 'Сегодня, 10:00', type: 'income' as const },
-  { id: 3, title: 'Яндекс.Такси', category: categories.transport, amount: -450, date: 'Вчера, 19:15', type: 'expense' as const },
-  { id: 4, title: 'Netflix', category: categories.subscriptions, amount: -799, date: 'Вчера, 12:00', type: 'expense' as const },
-  { id: 5, title: 'Аптека', category: categories.health, amount: -1200, date: '16 янв, 16:45', type: 'expense' as const },
+const initialTransactions: Transaction[] = [
+  { id: 1, title: 'Пятёрочка', category: categories.food, amount: -1850, date: 'Сегодня, 14:32', type: 'expense' },
+  { id: 2, title: 'Зарплата', category: categories.salary, amount: 95000, date: 'Сегодня, 10:00', type: 'income' },
+  { id: 3, title: 'Яндекс.Такси', category: categories.transport, amount: -450, date: 'Вчера, 19:15', type: 'expense' },
+  { id: 4, title: 'Netflix', category: categories.subscriptions, amount: -799, date: 'Вчера, 12:00', type: 'expense' },
+  { id: 5, title: 'Аптека', category: categories.health, amount: -1200, date: '16 янв, 16:45', type: 'expense' },
 ];
 
 const mockBudgetProgress = [
@@ -55,10 +65,14 @@ export default function Page() {
     return new Intl.NumberFormat('ru-RU').format(amount);
   };
 
-  const handleAddTransaction = (transaction: any) => {
-    const newTransaction = {
+  const handleAddTransaction = (transaction: { title: string; category: string; amount: number; date: string; type: 'income' | 'expense' }) => {
+    const newTransaction: Transaction = {
       id: transactions.length + 1,
-      ...transaction,
+      title: transaction.title,
+      category: transaction.category,
+      amount: transaction.amount,
+      date: transaction.date,
+      type: transaction.type,
     };
     setTransactions([newTransaction, ...transactions]);
   };
@@ -103,7 +117,7 @@ export default function Page() {
                   border: `1px solid ${designTokens.colors.border.light}`,
                 }}
               >
-                <Search size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                <Search size={18} style={{ color: designTokens.colors.text.muted }} />
                 <input
                   type="text"
                   placeholder="Поиск..."
@@ -255,7 +269,7 @@ export default function Page() {
                       <div 
                         key={account.id}
                         className="flex items-center justify-between p-3 rounded-lg"
-                        style={{ backgroundColor: designTokens.colors.background.secondary }}
+                        style={{ backgroundColor: designTokens.colors.background.muted }}
                       >
                         <div className="flex items-center gap-3">
                           <div 
@@ -329,7 +343,7 @@ export default function Page() {
                         </div>
                         <div 
                           className="w-full h-2 rounded-full overflow-hidden"
-                          style={{ backgroundColor: designTokens.colors.background.secondary }}
+                          style={{ backgroundColor: designTokens.colors.background.muted }}
                         >
                           <div 
                             className="h-full rounded-full transition-all"
@@ -378,7 +392,7 @@ export default function Page() {
                     <div 
                       key={tx.id}
                       className="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                      style={{ backgroundColor: designTokens.colors.background.secondary }}
+                      style={{ backgroundColor: designTokens.colors.background.muted }}
                     >
                       <div className="flex items-center gap-4">
                         <div 
@@ -419,7 +433,7 @@ export default function Page() {
                         </p>
                         <p 
                           className="text-sm"
-                          style={{ color: designTokens.colors.text.tertiary }}
+                          style={{ color: designTokens.colors.text.muted }}
                         >
                           {tx.date}
                         </p>

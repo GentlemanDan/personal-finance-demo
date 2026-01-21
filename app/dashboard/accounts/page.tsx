@@ -261,7 +261,7 @@ export default function AccountsPage() {
                       className="p-1 rounded-lg hover:bg-gray-100"
                       onClick={(e) => e.stopPropagation()}
                     >
-                      <MoreVertical size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                      <MoreVertical size={18} style={{ color: designTokens.colors.text.muted }} />
                     </button>
                   </div>
 
@@ -275,7 +275,7 @@ export default function AccountsPage() {
                     {'cardNumber' in account && (
                       <p 
                         className="text-sm"
-                        style={{ color: designTokens.colors.text.tertiary }}
+                        style={{ color: designTokens.colors.text.muted }}
                       >
                         {account.cardNumber}
                       </p>
@@ -283,7 +283,7 @@ export default function AccountsPage() {
                     {'interestRate' in account && (
                       <p 
                         className="text-sm"
-                        style={{ color: designTokens.colors.text.tertiary }}
+                        style={{ color: designTokens.colors.text.muted }}
                       >
                         {account.interestRate}% годовых
                       </p>
@@ -310,7 +310,7 @@ export default function AccountsPage() {
                   {'endDate' in account && (
                     <p 
                       className="text-sm mt-2"
-                      style={{ color: designTokens.colors.text.tertiary }}
+                      style={{ color: designTokens.colors.text.muted }}
                     >
                       До {account.endDate}
                     </p>
@@ -330,9 +330,9 @@ export default function AccountsPage() {
             >
               <div 
                 className="p-3 rounded-full mb-3"
-                style={{ backgroundColor: designTokens.colors.background.secondary }}
+                style={{ backgroundColor: designTokens.colors.background.muted }}
               >
-                <Plus size={24} style={{ color: designTokens.colors.text.tertiary }} />
+                <Plus size={24} style={{ color: designTokens.colors.text.muted }} />
               </div>
               <p 
                 className="font-medium"
@@ -375,7 +375,7 @@ export default function AccountsPage() {
                   <div 
                     key={tx.id}
                     className="flex items-center justify-between p-3 rounded-lg"
-                    style={{ backgroundColor: designTokens.colors.background.secondary }}
+                    style={{ backgroundColor: designTokens.colors.background.muted }}
                   >
                     <div className="flex items-center gap-3">
                       <div 

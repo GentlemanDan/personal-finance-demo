@@ -90,7 +90,7 @@ export default function DashboardPage() {
                   border: `1px solid ${designTokens.colors.border.light}`,
                 }}
               >
-                <Search size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                <Search size={18} style={{ color: designTokens.colors.text.muted }} />
                 <input
                   type="text"
                   placeholder="Поиск..."
@@ -240,7 +240,7 @@ export default function DashboardPage() {
                       <div 
                         key={account.id}
                         className="flex items-center justify-between p-3 rounded-lg"
-                        style={{ backgroundColor: designTokens.colors.background.secondary }}
+                        style={{ backgroundColor: designTokens.colors.background.muted }}
                       >
                         <div className="flex items-center gap-3">
                           <div 
@@ -314,7 +314,7 @@ export default function DashboardPage() {
                         </div>
                         <div 
                           className="w-full h-2 rounded-full overflow-hidden"
-                          style={{ backgroundColor: designTokens.colors.background.secondary }}
+                          style={{ backgroundColor: designTokens.colors.background.muted }}
                         >
                           <div 
                             className="h-full rounded-full transition-all"
@@ -363,7 +363,7 @@ export default function DashboardPage() {
                     <div 
                       key={tx.id}
                       className="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
-                      style={{ backgroundColor: designTokens.colors.background.secondary }}
+                      style={{ backgroundColor: designTokens.colors.background.muted }}
                     >
                       <div className="flex items-center gap-4">
                         <div 
@@ -404,7 +404,7 @@ export default function DashboardPage() {
                         </p>
                         <p 
                           className="text-sm"
-                          style={{ color: designTokens.colors.text.tertiary }}
+                          style={{ color: designTokens.colors.text.muted }}
                         >
                           {tx.date}
                         </p>

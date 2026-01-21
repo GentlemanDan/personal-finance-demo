@@ -41,6 +41,9 @@ export const translations = {
     monthExpenses: 'Расходы за месяц',
     savings: 'Накопления',
     netWorth: 'Чистый капитал',
+    balance: 'Баланс',
+    income: 'Доход',
+    expenses: 'Расходы',
   },
 
   // Счета
@@ -67,6 +70,10 @@ export const translations = {
     thisWeek: 'На этой неделе',
     thisMonth: 'В этом месяце',
     noTransactions: 'Нет операций',
+    paymentForGoods: 'Оплата товаров',
+    shares: 'Акции',
+    period: 'Период',
+    cardOrAccount: 'Карта/Счёт',
   },
 
   // Бюджет
@@ -85,12 +92,19 @@ export const translations = {
     title: 'Аналитика',
     week: 'Неделя',
     month: 'Месяц',
+    sixMonths: '6 месяцев',
     quarter: 'Квартал',
     year: 'Год',
     byCategory: 'По категориям',
     trend: 'Динамика',
     comparison: 'Сравнение',
     topExpenses: 'Топ расходов',
+    expectedIncome: 'Ожидаемый доход',
+  },
+
+  // Портфель
+  portfolio: {
+    stockPortfolio: 'Портфель акций',
   },
 
   // Цели накопления
@@ -167,6 +181,7 @@ export const translations = {
 
   // Общие действия
   actions: {
+    title: 'Быстрые действия',
     add: 'Добавить',
     edit: 'Редактировать',
     delete: 'Удалить',
@@ -177,6 +192,15 @@ export const translations = {
     filter: 'Фильтр',
     sort: 'Сортировка',
     search: 'Поиск',
+    transfer: 'Перевод',
+    receive: 'Получить',
+    topup: 'Пополнить',
+    pay: 'Оплатить',
+    investments: 'Инвестиции',
+    yourFinances: 'Ваши финансы',
+    piggyBank: 'Копилка',
+    expensesInMay: 'Расходы в мае',
+    favoriteSpends: 'Любимые расходы',
   },
 
   // Валюты

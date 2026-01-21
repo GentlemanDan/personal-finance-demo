@@ -303,7 +303,7 @@ export default function TransactionsPage() {
                 border: `1px solid ${designTokens.colors.border.light}`,
               }}
             >
-              <Search size={18} style={{ color: designTokens.colors.text.tertiary }} />
+              <Search size={18} style={{ color: designTokens.colors.text.muted }} />
               <input
                 type="text"
                 placeholder="Поиск операций..."
@@ -314,7 +314,7 @@ export default function TransactionsPage() {
               />
               {searchQuery && (
                 <button onClick={() => setSearchQuery('')}>
-                  <X size={16} style={{ color: designTokens.colors.text.tertiary }} />
+                  <X size={16} style={{ color: designTokens.colors.text.muted }} />
                 </button>
               )}
             </div>
@@ -378,7 +378,7 @@ export default function TransactionsPage() {
                 <div 
                   className="px-5 py-3 border-b"
                   style={{ 
-                    backgroundColor: designTokens.colors.background.secondary,
+                    backgroundColor: designTokens.colors.background.muted,
                     borderColor: designTokens.colors.border.light,
                   }}
                 >
@@ -454,7 +454,7 @@ export default function TransactionsPage() {
                         </p>
                         <p 
                           className="text-sm"
-                          style={{ color: designTokens.colors.text.tertiary }}
+                          style={{ color: designTokens.colors.text.muted }}
                         >
                           {tx.time}
                         </p>
@@ -499,7 +499,7 @@ export default function TransactionsPage() {
                 Новая операция
               </h2>
               <button onClick={() => setShowAddModal(false)}>
-                <X size={20} style={{ color: designTokens.colors.text.tertiary }} />
+                <X size={20} style={{ color: designTokens.colors.text.muted }} />
               </button>
             </div>
 

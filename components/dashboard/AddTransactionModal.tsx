@@ -121,7 +121,7 @@ export function AddTransactionModal({
             }}
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl transition-all font-medium"
             style={{
-              backgroundColor: activeTab === 'expense' ? '#fee2e2' : designTokens.colors.background.secondary,
+              backgroundColor: activeTab === 'expense' ? '#fee2e2' : designTokens.colors.background.muted,
               color: activeTab === 'expense' ? '#dc2626' : designTokens.colors.text.secondary,
             }}
           >
@@ -135,7 +135,7 @@ export function AddTransactionModal({
             }}
             className="flex-1 flex items-center justify-center gap-2 py-3 rounded-2xl transition-all font-medium"
             style={{
-              backgroundColor: activeTab === 'income' ? '#dcfce7' : designTokens.colors.background.secondary,
+              backgroundColor: activeTab === 'income' ? '#dcfce7' : designTokens.colors.background.muted,
               color: activeTab === 'income' ? '#16a34a' : designTokens.colors.text.secondary,
             }}
           >
@@ -159,7 +159,7 @@ export function AddTransactionModal({
                   onClick={() => handleCategorySelect(cat.id)}
                   className="flex flex-col items-center gap-2 p-4 rounded-xl transition-all"
                   style={{
-                    backgroundColor: isSelected ? `${cat.color}15` : designTokens.colors.background.secondary,
+                    backgroundColor: isSelected ? `${cat.color}15` : designTokens.colors.background.muted,
                     border: `2px solid ${isSelected ? cat.color : 'transparent'}`,
                   }}
                 >
@@ -198,7 +198,7 @@ export function AddTransactionModal({
             />
             <span 
               className="text-2xl font-medium"
-              style={{ color: designTokens.colors.text.tertiary }}
+              style={{ color: designTokens.colors.text.muted }}
             >
               ₽
             </span>
@@ -211,7 +211,7 @@ export function AddTransactionModal({
             onClick={() => onOpenChange(false)}
             className="flex-1 py-3 px-4 font-medium rounded-xl transition-colors"
             style={{
-              backgroundColor: designTokens.colors.background.secondary,
+              backgroundColor: designTokens.colors.background.muted,
               color: designTokens.colors.text.secondary,
             }}
           >
@@ -223,7 +223,7 @@ export function AddTransactionModal({
             className="flex-1 py-3 px-4 font-medium text-white rounded-xl transition-all"
             style={{
               backgroundColor: (!amount || !selectedCategory) 
-                ? designTokens.colors.text.tertiary 
+                ? designTokens.colors.text.muted 
                 : designTokens.colors.brand.primary,
               cursor: (!amount || !selectedCategory) ? 'not-allowed' : 'pointer',
               opacity: (!amount || !selectedCategory) ? 0.5 : 1,
