@@ -1,6 +1,6 @@
 {
-  "name": "Mevolut",
-  "description": "Manage your money the easy way with Mevolut. Track expenses, send money, and grow your savings – safely and simply. Sign up free today!",
+  "name": "FinTrack",
+  "description": "FinTrack — веб-приложение для управления личными финансами. Учёт доходов и расходов, планирование бюджета, финансовые цели и аналитика.",
   "version": "1.0.0",
   "private": true,
   "scripts": {

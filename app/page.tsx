@@ -1,399 +1,447 @@
-// @ts-nocheck
+'use client';
 
-import Header from '@/components/shared/Header';
-import Footer from '@/components/shared/Footer';
-import { LandingHeaderMenuItem } from '@/components/landing';
-import { LandingPrimaryImageCtaSection } from '@/components/landing';
-import { LandingSocialProof } from '@/components/landing';
-import { LandingFeatureList } from '@/components/landing';
-import { LandingProductSteps } from '@/components/landing';
-import { LandingProductFeature } from '@/components/landing';
-import { LandingTestimonialReadMoreWrapper } from '@/components/landing';
-import { LandingTestimonialGrid } from '@/components/landing';
-import { LandingSaleCtaSection } from '@/components/landing';
-import { LandingFaqCollapsibleSection } from '@/components/landing';
-import { LandingFooter } from '@/components/landing';
-import { LandingFooterColumn } from '@/components/landing';
-import { LandingFooterLink } from '@/components/landing';
-import Image from 'next/image';
-import { Button } from '@/components/shared/ui/button';
-import Link from 'next/link';
-import { CreditCard, Lock, Shield, TrendingUp, Users, Zap } from 'lucide-react';
+import * as React from 'react';
+import { Sidebar } from '@/components/dashboard/Sidebar';
+import { Fab } from '@/components/shared/ui/fab';
+import { AddTransactionModal } from '@/components/dashboard/AddTransactionModal';
+import { 
+  Search, 
+  Bell, 
+  Plus, 
+  TrendingUp, 
+  ArrowUpRight,
+  ArrowDownLeft,
+  Wallet,
+  CreditCard,
+  PiggyBank,
+  ChevronRight,
+} from 'lucide-react';
+import { translations } from '@/lib/translations';
+import { designTokens } from '@/lib/design-tokens';
+
+const { overview, categories, greeting, accounts, currency } = translations;
+
+// Моковые данные
+const initialAccounts = [
+  { id: 1, name: 'Основная карта', type: 'card', balance: 156420, icon: CreditCard, color: '#10b981' },
+  { id: 2, name: 'Наличные', type: 'cash', balance: 12500, icon: Wallet, color: '#f59e0b' },
+  { id: 3, name: 'Накопительный', type: 'deposit', balance: 450000, icon: PiggyBank, color: '#8b5cf6' },
+];
+
+const initialTransactions = [
+  { id: 1, title: 'Пятёрочка', category: categories.food, amount: -1850, date: 'Сегодня, 14:32', type: 'expense' as const },
+  { id: 2, title: 'Зарплата', category: categories.salary, amount: 95000, date: 'Сегодня, 10:00', type: 'income' as const },
+  { id: 3, title: 'Яндекс.Такси', category: categories.transport, amount: -450, date: 'Вчера, 19:15', type: 'expense' as const },
+  { id: 4, title: 'Netflix', category: categories.subscriptions, amount: -799, date: 'Вчера, 12:00', type: 'expense' as const },
+  { id: 5, title: 'Аптека', category: categories.health, amount: -1200, date: '16 янв, 16:45', type: 'expense' as const },
+];
+
+const mockBudgetProgress = [
+  { category: categories.food, spent: 18500, budget: 25000, color: '#10b981' },
+  { category: categories.transport, spent: 4200, budget: 8000, color: '#3b82f6' },
+  { category: categories.entertainment, spent: 6800, budget: 5000, color: '#ef4444' },
+  { category: categories.shopping, spent: 3500, budget: 10000, color: '#f59e0b' },
+];
 
 export default function Page() {
+  const [transactions, setTransactions] = React.useState(initialTransactions);
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  const totalBalance = initialAccounts.reduce((sum, acc) => sum + acc.balance, 0);
+  const monthIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+  const monthExpenses = Math.abs(transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0));
+
+  const formatMoney = (amount: number) => {
+    return new Intl.NumberFormat('ru-RU').format(amount);
+  };
+
+  const handleAddTransaction = (transaction: any) => {
+    const newTransaction = {
+      id: transactions.length + 1,
+      ...transaction,
+    };
+    setTransactions([newTransaction, ...transactions]);
+  };
+
   return (
-    <>
-      <Header className="mb-4" />
+    <div className="dashboard-page flex min-h-screen" style={{ backgroundColor: designTokens.colors.background.page }}>
+      <Sidebar />
 
-      <LandingPrimaryImageCtaSection
-        title="A simpler way to manage your money"
-        description="Take charge of your finances with Mevolut. Your money, clear and simple."
-        imageSrc="/static/images/1.jpg"
-        imageAlt="Dashboard Preview"
-        imagePosition="right"
-        imageShadow="hard"
-        textPosition="left"
-        withBackground={false}
-        variant="primary"
-        minHeight={350}
+      <main
+        className="flex-1"
+        style={{
+          marginLeft: designTokens.layout.sidebar.width,
+          padding: designTokens.layout.content.padding,
+        }}
       >
-        <Button size="xl" asChild>
-          <Link href="/dashboard">Dashboard</Link>
-        </Button>
-        <Button size="xl" variant="outlinePrimary" asChild>
-          <Link href="/pricing">Pricing</Link>
-        </Button>
-        <LandingSocialProof
-          className="mt-6 w-full"
-          avatarItems={[
-            {
-              imageSrc: '/static/images/people/1.webp',
-              name: 'Sarah Johnson',
-            },
-            {
-              imageSrc: '/static/images/people/2.webp',
-              name: 'Michael Chen',
-            },
-            {
-              imageSrc: '/static/images/people/3.webp',
-              name: 'Emily Rodriguez',
-            },
-          ]}
-          numberOfUsers={1100}
-          suffixText="happy users"
-        />
-      </LandingPrimaryImageCtaSection>
+        <div style={{ maxWidth: designTokens.layout.content.maxWidth, margin: '0 auto' }}>
+          
+          {/* Header */}
+          <header className="flex items-center justify-between mb-8">
+            <div>
+              <h1 
+                className="font-semibold"
+                style={{ 
+                  fontSize: designTokens.typography.fontSize.h2,
+                  color: designTokens.colors.text.primary,
+                }}
+              >
+                {greeting.goodDay}, Герасим! 👋
+              </h1>
+              <p style={{ color: designTokens.colors.text.muted, marginTop: '4px' }}>
+                {greeting.longTimeNoSee}
+              </p>
+            </div>
 
-      <div className="container-wide p-12 w-full flex flex-wrap items-center justify-center gap-6 dark:invert">
-        <span className="w-full text-center text-sm opacity-70 dark:invert">
-          As seen on
-        </span>
-        <Image
-          src="/static/images/outlets/tech-crunch.svg"
-          alt="TechCrunch"
-          width={300}
-          height={300}
-          className="w-auto h-6"
-        />
-        <Image
-          src="/static/images/outlets/the-new-york-times.svg"
-          alt="The New York Times"
-          width={300}
-          height={300}
-          className="w-auto h-8"
-        />
-        <Image
-          src="/static/images/outlets/cnn.svg"
-          alt="CNN"
-          width={300}
-          height={300}
-          className="w-auto h-7"
-        />
-        <Image
-          src="/static/images/outlets/the-verge.svg"
-          alt="The Verge"
-          width={300}
-          height={300}
-          className="w-auto h-7"
-        />
-      </div>
+            <div className="flex items-center gap-3">
+              {/* Search */}
+              <div 
+                className="flex items-center gap-2 px-4 py-2"
+                style={{ 
+                  backgroundColor: '#fff',
+                  borderRadius: designTokens.borderRadius.lg,
+                  border: `1px solid ${designTokens.colors.border.light}`,
+                }}
+              >
+                <Search size={18} style={{ color: designTokens.colors.text.tertiary }} />
+                <input
+                  type="text"
+                  placeholder="Поиск..."
+                  className="border-none outline-none bg-transparent"
+                  style={{ width: '180px', fontSize: designTokens.typography.fontSize.body }}
+                />
+              </div>
 
-      <LandingFeatureList
-        id="features"
-        title="Everything you need to manage your money"
-        description="Simple, powerful tools to help you take control of your finances."
-        featureItems={[
-          {
-            title: 'See your spending, simply',
-            description:
-              'Track every transaction automatically. Get instant insights into where your money goes with beautiful, easy-to-understand charts and reports.',
-            icon: <TrendingUp className="w-8 h-8" />,
-          },
-          {
-            title: 'Send and receive money instantly',
-            description:
-              'Transfer money to friends and family in seconds. No fees, no waiting. Just fast, secure payments whenever you need them.',
-            icon: <Zap className="w-8 h-8" />,
-          },
-          {
-            title: 'Save money automatically',
-            description:
-              'Set savings goals and watch your money grow. Our smart algorithms help you save without thinking about it, building your financial future effortlessly.',
-            icon: <CreditCard className="w-8 h-8" />,
-          },
-          {
-            title: 'Bank-level security',
-            description:
-              'Your money and data are protected with 256-bit encryption. We use the same security standards as major banks to keep your information safe.',
-            icon: <Shield className="w-8 h-8" />,
-          },
-          {
-            title: 'Multi-account management',
-            description:
-              'Connect all your bank accounts in one place. Get a complete view of your finances and manage everything from a single dashboard.',
-            icon: <Users className="w-8 h-8" />,
-          },
-          {
-            title: 'Privacy guaranteed',
-            description:
-              "We never sell your data. Your financial information stays private and secure. You're in complete control of who sees what.",
-            icon: <Lock className="w-8 h-8" />,
-          },
-        ]}
-        withBackground
-        withBackgroundGlow
-        variant="primary"
-        backgroundGlowVariant="primary"
-      />
-
-      <LandingProductSteps
-        title="How it Works"
-        description="Get started with Mevolut in three simple steps. No complicated setup, no hidden fees."
-        display="grid"
-        withBackground={false}
-        variant="primary"
-      >
-        <LandingProductFeature
-          title="1. Sign up in minutes"
-          description="Create your account quickly and securely. Just enter your email, set a password, and you're ready to go. No lengthy forms or waiting periods."
-          imageSrc="/static/images/2.jpg"
-          imageAlt="Sign up process"
-          imagePosition="center"
-          imageShadow="soft"
-          zoomOnHover
-          minHeight={350}
-          withBackground={false}
-          withBackgroundGlow={false}
-          variant="primary"
-          backgroundGlowVariant="primary"
-        />
-        <LandingProductFeature
-          title="2. Connect your bank accounts"
-          description="Link your existing bank accounts safely using our secure connection. We support thousands of banks and credit unions across the country."
-          imageSrc="/static/images/3.jpg"
-          imageAlt="Connect banks"
-          imagePosition="center"
-          imageShadow="soft"
-          zoomOnHover
-          minHeight={350}
-          withBackground={false}
-          withBackgroundGlow={false}
-          variant="primary"
-          backgroundGlowVariant="primary"
-        />
-        <LandingProductFeature
-          title="3. Start managing your money"
-          description="View all your accounts in one place. Track spending, set budgets, and achieve your financial goals with powerful insights and automation."
-          imageSrc="/static/images/4.jpg"
-          imageAlt="Manage money"
-          imagePosition="center"
-          imageShadow="soft"
-          zoomOnHover
-          minHeight={350}
-          withBackground={false}
-          withBackgroundGlow={false}
-          variant="primary"
-          backgroundGlowVariant="primary"
-        />
-      </LandingProductSteps>
-
-      <LandingProductFeature
-        id="security"
-        title="Your money is safe with us"
-        descriptionComponent={
-          <>
-            <p className="mb-6">
-              We take security seriously. Your financial data is protected with
-              industry-leading encryption and security measures.{' '}
-            </p>
-            <ul className="space-y-3 mb-8">
-              <li className="flex items-start">
-                <Shield className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-                <span>
-                  <strong>256-bit encryption: </strong>
-                  Bank-level security protects all your data
+              {/* Notifications */}
+              <button 
+                className="relative p-2"
+                style={{ 
+                  backgroundColor: '#fff',
+                  borderRadius: designTokens.borderRadius.lg,
+                  border: `1px solid ${designTokens.colors.border.light}`,
+                }}
+              >
+                <Bell size={20} style={{ color: designTokens.colors.text.secondary }} />
+                <span 
+                  className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center text-white text-xs rounded-full"
+                  style={{ backgroundColor: '#ef4444' }}
+                >
+                  3
                 </span>
-              </li>
-              <li className="flex items-start">
-                <Shield className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-                <span>
-                  <strong>FDIC insurance: </strong>
-                  Your deposits are insured up to $250,000
-                </span>
-              </li>
-              <li className="flex items-start">
-                <Shield className="w-5 h-5 mr-3 mt-0.5 flex-shrink-0" />
-                <span>
-                  <strong>Privacy guaranteed: </strong>
-                  We never sell your personal information
-                </span>
-              </li>
-            </ul>
-          </>
-        }
-        imageSrc="/static/images/5.jpg"
-        imageAlt="Security features"
-        imagePosition="right"
-        imageShadow="hard"
-        textPosition="left"
-        withBackground
-        withBackgroundGlow
-        variant="primary"
-        backgroundGlowVariant="primary"
-        imagePerspective="bottom"
-        zoomOnHover
-        minHeight={350}
+              </button>
+
+              {/* Add Transaction */}
+              <button 
+                onClick={() => setIsModalOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 text-white font-medium"
+                style={{ 
+                  backgroundColor: designTokens.colors.brand.primary,
+                  borderRadius: designTokens.borderRadius.lg,
+                  cursor: 'pointer',
+                }}
+              >
+                <Plus size={18} />
+                Добавить
+              </button>
+            </div>
+          </header>
+
+          {/* Overview Cards */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+            {/* Total Balance */}
+            <div 
+              className="p-5"
+              style={{ 
+                background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
+                borderRadius: designTokens.borderRadius.xl,
+                color: 'white',
+              }}
+            >
+              <p className="opacity-80 text-sm mb-1">{overview.totalBalance}</p>
+              <p className="text-3xl font-bold mb-3">{formatMoney(totalBalance)} {currency.rub}</p>
+              <div className="flex items-center gap-1 text-sm opacity-80">
+                <TrendingUp size={16} />
+                <span>+12.5% за месяц</span>
+              </div>
+            </div>
+
+            {/* Month Income */}
+            <div 
+              className="p-5 bg-white"
+              style={{ 
+                borderRadius: designTokens.borderRadius.xl,
+                boxShadow: designTokens.shadows.sm,
+              }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm">{overview.monthIncome}</p>
+                <div 
+                  className="p-2 rounded-lg"
+                  style={{ backgroundColor: '#dcfce7' }}
+                >
+                  <ArrowDownLeft size={18} style={{ color: '#16a34a' }} />
+                </div>
+              </div>
+              <p 
+                className="text-2xl font-bold"
+                style={{ color: designTokens.colors.text.primary }}
+              >
+                +{formatMoney(monthIncome)} {currency.rub}
+              </p>
+            </div>
+
+            {/* Month Expenses */}
+            <div 
+              className="p-5 bg-white"
+              style={{ 
+                borderRadius: designTokens.borderRadius.xl,
+                boxShadow: designTokens.shadows.sm,
+              }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm">{overview.monthExpenses}</p>
+                <div 
+                  className="p-2 rounded-lg"
+                  style={{ backgroundColor: '#fee2e2' }}
+                >
+                  <ArrowUpRight size={18} style={{ color: '#dc2626' }} />
+                </div>
+              </div>
+              <p 
+                className="text-2xl font-bold"
+                style={{ color: designTokens.colors.text.primary }}
+              >
+                -{formatMoney(monthExpenses)} {currency.rub}
+              </p>
+            </div>
+          </div>
+
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            
+            {/* Left Column - Accounts & Budget */}
+            <div className="lg:col-span-1 space-y-6">
+              
+              {/* Accounts */}
+              <div 
+                className="p-5 bg-white"
+                style={{ 
+                  borderRadius: designTokens.borderRadius.xl,
+                  boxShadow: designTokens.shadows.sm,
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h2 
+                    className="font-semibold"
+                    style={{ 
+                      fontSize: designTokens.typography.fontSize.h4,
+                      color: designTokens.colors.text.primary,
+                    }}
+                  >
+                    {accounts.title}
+                  </h2>
+                  <button 
+                    className="text-sm font-medium flex items-center gap-1"
+                    style={{ color: designTokens.colors.brand.primary }}
+                  >
+                    Все <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  {initialAccounts.map((account) => {
+                    const Icon = account.icon;
+                    return (
+                      <div 
+                        key={account.id}
+                        className="flex items-center justify-between p-3 rounded-lg"
+                        style={{ backgroundColor: designTokens.colors.background.secondary }}
+                      >
+                        <div className="flex items-center gap-3">
+                          <div 
+                            className="p-2 rounded-lg"
+                            style={{ backgroundColor: `${account.color}20` }}
+                          >
+                            <Icon size={20} style={{ color: account.color }} />
+                          </div>
+                          <span style={{ color: designTokens.colors.text.primary }}>
+                            {account.name}
+                          </span>
+                        </div>
+                        <span 
+                          className="font-medium"
+                          style={{ color: designTokens.colors.text.primary }}
+                        >
+                          {formatMoney(account.balance)} {currency.rub}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Budget Progress */}
+              <div 
+                className="p-5 bg-white"
+                style={{ 
+                  borderRadius: designTokens.borderRadius.xl,
+                  boxShadow: designTokens.shadows.sm,
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h2 
+                    className="font-semibold"
+                    style={{ 
+                      fontSize: designTokens.typography.fontSize.h4,
+                      color: designTokens.colors.text.primary,
+                    }}
+                  >
+                    Бюджет на январь
+                  </h2>
+                  <button 
+                    className="text-sm font-medium flex items-center gap-1"
+                    style={{ color: designTokens.colors.brand.primary }}
+                  >
+                    Все <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                <div className="space-y-4">
+                  {mockBudgetProgress.map((item, index) => {
+                    const progress = Math.min((item.spent / item.budget) * 100, 100);
+                    const isOver = item.spent > item.budget;
+                    
+                    return (
+                      <div key={index}>
+                        <div className="flex items-center justify-between mb-2">
+                          <span 
+                            className="text-sm"
+                            style={{ color: designTokens.colors.text.primary }}
+                          >
+                            {item.category}
+                          </span>
+                          <span 
+                            className="text-sm"
+                            style={{ color: isOver ? '#ef4444' : designTokens.colors.text.secondary }}
+                          >
+                            {formatMoney(item.spent)} / {formatMoney(item.budget)} {currency.rub}
+                          </span>
+                        </div>
+                        <div 
+                          className="w-full h-2 rounded-full overflow-hidden"
+                          style={{ backgroundColor: designTokens.colors.background.secondary }}
+                        >
+                          <div 
+                            className="h-full rounded-full transition-all"
+                            style={{ 
+                              width: `${progress}%`,
+                              backgroundColor: isOver ? '#ef4444' : item.color,
+                            }}
+                          />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column - Transactions */}
+            <div className="lg:col-span-2">
+              <div 
+                className="p-5 bg-white h-full"
+                style={{ 
+                  borderRadius: designTokens.borderRadius.xl,
+                  boxShadow: designTokens.shadows.sm,
+                }}
+              >
+                <div className="flex items-center justify-between mb-4">
+                  <h2 
+                    className="font-semibold"
+                    style={{ 
+                      fontSize: designTokens.typography.fontSize.h4,
+                      color: designTokens.colors.text.primary,
+                    }}
+                  >
+                    Последние операции
+                  </h2>
+                  <button 
+                    className="text-sm font-medium flex items-center gap-1"
+                    style={{ color: designTokens.colors.brand.primary }}
+                  >
+                    Все операции <ChevronRight size={16} />
+                  </button>
+                </div>
+
+                <div className="space-y-3">
+                  {transactions.map((tx) => (
+                    <div 
+                      key={tx.id}
+                      className="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer"
+                      style={{ backgroundColor: designTokens.colors.background.secondary }}
+                    >
+                      <div className="flex items-center gap-4">
+                        <div 
+                          className="w-10 h-10 rounded-full flex items-center justify-center"
+                          style={{ 
+                            backgroundColor: tx.type === 'income' ? '#dcfce7' : '#fee2e2',
+                          }}
+                        >
+                          {tx.type === 'income' ? (
+                            <ArrowDownLeft size={20} style={{ color: '#16a34a' }} />
+                          ) : (
+                            <ArrowUpRight size={20} style={{ color: '#dc2626' }} />
+                          )}
+                        </div>
+                        <div>
+                          <p 
+                            className="font-medium"
+                            style={{ color: designTokens.colors.text.primary }}
+                          >
+                            {tx.title}
+                          </p>
+                          <p 
+                            className="text-sm"
+                            style={{ color: designTokens.colors.text.secondary }}
+                          >
+                            {tx.category}
+                          </p>
+                        </div>
+                      </div>
+                      <div className="text-right">
+                        <p 
+                          className="font-semibold"
+                          style={{ 
+                            color: tx.type === 'income' ? '#16a34a' : '#dc2626',
+                          }}
+                        >
+                          {tx.type === 'income' ? '+' : ''}{formatMoney(tx.amount)} {currency.rub}
+                        </p>
+                        <p 
+                          className="text-sm"
+                          style={{ color: designTokens.colors.text.tertiary }}
+                        >
+                          {tx.date}
+                        </p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      {/* FAB Button */}
+      <Fab onClick={() => setIsModalOpen(true)} />
+
+      {/* Add Transaction Modal */}
+      <AddTransactionModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        onAddTransaction={handleAddTransaction}
       />
-
-      <LandingTestimonialReadMoreWrapper>
-        <LandingTestimonialGrid
-          title="Loved by thousands of users"
-          description="See what our customers have to say about managing their finances with Mevolut."
-          testimonialItems={[
-            {
-              name: 'Sarah Anderson',
-              text: 'Mevolut made budgeting so much easier for me. I can finally see where my money goes each month and make smarter decisions about my spending.',
-              handle: '@sarahanderson',
-              imageSrc: '/static/images/people/4.webp',
-              url: '#',
-              verified: true,
-            },
-            {
-              name: 'John Bennett',
-              text: "Mevolut helped me finally understand where my money goes each month. Now I feel in control of my finances and I'm actually saving money for the first time.",
-              handle: '@johnbennett',
-              imageSrc: '/static/images/people/5.webp',
-              url: '#',
-              verified: true,
-            },
-            {
-              name: 'Maria Garcia',
-              text: "The automatic savings feature is a game changer. I've saved more in three months with Mevolut than I did all last year trying to do it manually.",
-              handle: '@mariagarcia',
-              imageSrc: '/static/images/people/6.webp',
-              url: '#',
-            },
-            {
-              name: 'David Kim',
-              text: 'I love how simple everything is. No confusing menus or complicated features. Just straightforward money management that actually works.',
-              handle: '@davidkim',
-              imageSrc: '/static/images/people/7.webp',
-              url: '#',
-              verified: true,
-            },
-            {
-              name: 'Emily Rodriguez',
-              text: 'Being able to see all my accounts in one place has been incredible. I finally have a complete picture of my financial situation and can plan accordingly.',
-              handle: '@emilyrodriguez',
-              imageSrc: '/static/images/people/8.webp',
-              url: '#',
-            },
-            {
-              name: 'Michael Thompson',
-              text: "The security features give me peace of mind. I know my financial data is protected and my privacy is respected. That's worth everything to me.",
-              handle: '@michaelthompson',
-              imageSrc: '/static/images/people/9.webp',
-              url: '#',
-              verified: true,
-            },
-            {
-              name: 'Jessica Lee',
-              text: 'Mevolut has completely changed how I think about money. The insights and reports help me make better financial decisions every single day.',
-              handle: '@jessicalee',
-              imageSrc: '/static/images/people/10.webp',
-              url: '#',
-            },
-            {
-              name: 'Robert Martinez',
-              text: "I was skeptical at first, but Mevolut has exceeded all my expectations. It's intuitive, powerful, and has genuinely improved my financial health.",
-              handle: '@robertmartinez',
-              imageSrc: '/static/images/people/11.webp',
-              url: '#',
-              verified: true,
-            },
-            {
-              name: 'Amanda Chen',
-              text: 'The instant money transfers are so convenient. I can split bills with friends or send money to family in seconds. No more waiting days for transfers.',
-              handle: '@amandachen',
-              imageSrc: '/static/images/people/12.webp',
-              url: '#',
-            },
-          ]}
-          withBackground={false}
-          variant="primary"
-        />
-      </LandingTestimonialReadMoreWrapper>
-
-      <LandingSaleCtaSection
-        id="pricing"
-        title="Simple, fair pricing"
-        description="No hidden fees. No surprises. Just transparent pricing that makes sense for everyone."
-        withBackground
-        withBackgroundGlow
-        variant="primary"
-        backgroundGlowVariant="primary"
-      >
-        <Button size="xl" asChild>
-          <Link href="/plans">See Plans</Link>
-        </Button>
-      </LandingSaleCtaSection>
-
-      <LandingFaqCollapsibleSection
-        id="faq"
-        title="Frequently Asked Questions"
-        description="Got questions? We've got answers. Find everything you need to know about Mevolut."
-        faqItems={[
-          {
-            question: 'Is Mevolut free to use?',
-            answer:
-              'Yes! Mevolut offers a free plan with essential features. We also have premium plans with advanced features for users who need more functionality. There are no hidden fees or surprise charges.',
-          },
-          {
-            question: 'How secure is my financial data?',
-            answer:
-              'Your security is our top priority. We use 256-bit encryption, the same level of security used by major banks. Your data is protected with multiple layers of security, and we never sell your personal information to third parties.',
-          },
-          {
-            question: 'Which banks can I connect to Mevolut?',
-            answer:
-              'Mevolut supports thousands of banks and credit unions across the United States. We work with all major banks and most regional institutions. If you have questions about a specific bank, please contact our support team.',
-          },
-          {
-            question: 'Can I use Mevolut on my phone?',
-            answer:
-              'Absolutely! Mevolut works seamlessly on all devices including smartphones, tablets, and desktop computers. Access your finances anytime, anywhere with our responsive web app.',
-          },
-          {
-            question: 'How does automatic saving work?',
-            answer:
-              "Our smart algorithms analyze your spending patterns and income to automatically set aside small amounts you won't miss. You can customize your savings goals and rules, and we'll handle the rest automatically.",
-          },
-          {
-            question: 'What if I need help or have questions?',
-            answer:
-              'Our customer support team is here to help! You can reach us via email, live chat, or phone. We also have a comprehensive help center with guides and tutorials to help you get the most out of Mevolut.',
-          },
-        ]}
-        withBackground={false}
-        withBackgroundGlow={false}
-        variant="primary"
-        backgroundGlowVariant="primary"
-      />
-
-      <LandingSaleCtaSection
-        title="Ready to take control? Join Mevolut today."
-        description="Start managing your money smarter. Sign up free and see the difference in minutes."
-        withBackground
-        withBackgroundGlow
-        variant="primary"
-        backgroundGlowVariant="primary"
-      >
-        <Button size="xl" asChild>
-          <Link href="/signup">Sign Up Free</Link>
-        </Button>
-      </LandingSaleCtaSection>
-
-      <Footer className="mt-8" />
-    </>
+    </div>
   );
 }

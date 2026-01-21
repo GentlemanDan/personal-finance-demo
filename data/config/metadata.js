@@ -1,10 +1,10 @@
 const metadata = {
-  title: 'Mevolut | Simple B2C Fintech for your Money',
+  title: 'FinTrack | Управление личными финансами',
   description:
-    'Manage your money the easy way with Mevolut. Track expenses, send money, and grow your savings – safely and simply. Sign up free today!',
-  domain: 'pageai.pro',
-  logoTitle: '',
-  businessName: 'Mevolut',
+    'FinTrack — веб-приложение для управления личными финансами. Учёт доходов и расходов, планирование бюджета, финансовые цели и аналитика.',
+  domain: 'fintrack.app',
+  logoTitle: 'FinTrack',
+  businessName: 'FinTrack',
   siteUrl: 'https://pageai.pro',
   siteRepo: '',
   socialBanner: '/api/og',
@@ -19,10 +19,10 @@ const metadata = {
   facebook: '',
   threads: '',
   mastodon: '',
-  author: 'Mevolut',
-  language: 'en-us',
+  author: 'FinTrack',
+  language: 'ru-RU',
   theme: 'light',
-  locale: 'en-US',
+  locale: 'ru-RU',
 };
 
 module.exports = { metadata };

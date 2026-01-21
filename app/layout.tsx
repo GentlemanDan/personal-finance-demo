@@ -1,4 +1,4 @@
-import { Nunito_Sans } from 'next/font/google';
+import { Nunito_Sans, Rubik } from 'next/font/google';
 import { siteConfig } from '@/data/config/site.settings';
 import { ThemeProviders } from './theme-providers';
 import { Metadata } from 'next';
@@ -19,6 +19,14 @@ const baseFont = Nunito_Sans({
   subsets: ['latin'],
   display: 'swap',
   variable: '--font-space-default',
+});
+
+// EdgesPay Dashboard Font
+const rubikFont = Rubik({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600', '700'],
+  display: 'swap',
+  variable: '--font-rubik',
 });
 
 const globalColors = colors;
@@ -79,7 +87,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${baseFont.variable} ${displayFont.variable} scroll-smooth`}
+      className={`${baseFont.variable} ${displayFont.variable} ${rubikFont.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>
