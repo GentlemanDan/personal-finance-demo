@@ -1,4 +1,4 @@
-import { Nunito_Sans, Rubik } from 'next/font/google';
+import { Outfit, Inter_Tight } from 'next/font/google';
 import { siteConfig } from '@/data/config/site.settings';
 import { ThemeProviders } from './theme-providers';
 import { Metadata } from 'next';
@@ -9,24 +9,28 @@ import '@/css/globals.css';
 import { SearchProvider } from '@/components/shared/SearchProvider';
 import { AnalyticsWrapper } from '@/components/shared/Analytics';
 
-const displayFont = Nunito_Sans({
+// Refined display font - geometric elegance
+const displayFont = Outfit({
   subsets: ['latin'],
+  weight: ['600', '700', '800'],
   display: 'swap',
   variable: '--font-space-display',
 });
 
-const baseFont = Nunito_Sans({
+// Body font - sophisticated and readable
+const baseFont = Inter_Tight({
   subsets: ['latin'],
+  weight: ['400', '500', '600'],
   display: 'swap',
   variable: '--font-space-default',
 });
 
-// EdgesPay Dashboard Font
-const rubikFont = Rubik({
-  subsets: ['latin', 'cyrillic'],
+// Dashboard accent font
+const accentFont = Outfit({
+  subsets: ['latin'],
   weight: ['400', '500', '600', '700'],
   display: 'swap',
-  variable: '--font-rubik',
+  variable: '--font-accent',
 });
 
 const globalColors = colors;
@@ -87,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang={siteConfig.language}
-      className={`${baseFont.variable} ${displayFont.variable} ${rubikFont.variable} scroll-smooth`}
+      className={`${baseFont.variable} ${displayFont.variable} ${accentFont.variable} scroll-smooth`}
       suppressHydrationWarning
     >
       <head>

@@ -78,7 +78,7 @@ export default function Page() {
   };
 
   return (
-    <div className="dashboard-page flex min-h-screen" style={{ backgroundColor: designTokens.colors.background.page }}>
+    <div className="dashboard-page flex min-h-screen">
       <Sidebar />
 
       <main
@@ -90,14 +90,16 @@ export default function Page() {
       >
         <div style={{ maxWidth: designTokens.layout.content.maxWidth, margin: '0 auto' }}>
           
-          {/* Header */}
-          <header className="flex items-center justify-between mb-8">
+          {/* Header with refined animation */}
+          <header className="flex items-center justify-between mb-8 animate-fade-in-up">
             <div>
               <h1 
                 className="font-semibold"
                 style={{ 
                   fontSize: designTokens.typography.fontSize.h2,
                   color: designTokens.colors.text.primary,
+                  fontFamily: 'var(--font-space-display)',
+                  letterSpacing: '-0.02em',
                 }}
               >
                 {greeting.goodDay}, Герасим! 👋
@@ -108,13 +110,11 @@ export default function Page() {
             </div>
 
             <div className="flex items-center gap-3">
-              {/* Search */}
+              {/* Search with glass effect */}
               <div 
-                className="flex items-center gap-2 px-4 py-2"
+                className="finance-card flex items-center gap-2 px-4 py-2 stagger-1 animate-fade-in-up"
                 style={{ 
-                  backgroundColor: '#fff',
                   borderRadius: designTokens.borderRadius.lg,
-                  border: `1px solid ${designTokens.colors.border.light}`,
                 }}
               >
                 <Search size={18} style={{ color: designTokens.colors.text.muted }} />
@@ -126,28 +126,29 @@ export default function Page() {
                 />
               </div>
 
-              {/* Notifications */}
+              {/* Notifications with hover effect */}
               <button 
-                className="relative p-2"
+                className="finance-card relative p-2 hover-lift stagger-2 animate-fade-in-up"
                 style={{ 
-                  backgroundColor: '#fff',
                   borderRadius: designTokens.borderRadius.lg,
-                  border: `1px solid ${designTokens.colors.border.light}`,
                 }}
               >
                 <Bell size={20} style={{ color: designTokens.colors.text.secondary }} />
                 <span 
                   className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center text-white text-xs rounded-full"
-                  style={{ backgroundColor: '#ef4444' }}
+                  style={{ 
+                    background: 'linear-gradient(135deg, #ef4444 0%, #dc2626 100%)',
+                    boxShadow: '0 2px 8px rgba(239, 68, 68, 0.4)',
+                  }}
                 >
                   3
                 </span>
               </button>
 
-              {/* Add Transaction */}
+              {/* Add Transaction with glossy effect */}
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="flex items-center gap-2 px-4 py-2 text-white font-medium"
+                className="btn-glossy flex items-center gap-2 px-4 py-2 text-white font-medium stagger-3 animate-fade-in-up"
                 style={{ 
                   backgroundColor: designTokens.colors.brand.primary,
                   borderRadius: designTokens.borderRadius.lg,
@@ -160,73 +161,107 @@ export default function Page() {
             </div>
           </header>
 
-          {/* Overview Cards */}
+          {/* Overview Cards with premium gradients and animations */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
-            {/* Total Balance */}
+            {/* Total Balance with dramatic shadow */}
             <div 
-              className="p-5"
+              className="p-6 hover-lift animate-fade-in-up stagger-1"
               style={{ 
                 background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)',
                 borderRadius: designTokens.borderRadius.xl,
                 color: 'white',
+                boxShadow: '0 8px 24px rgba(16, 185, 129, 0.25), 0 4px 8px rgba(16, 185, 129, 0.15)',
+                position: 'relative',
+                overflow: 'hidden',
               }}
             >
-              <p className="opacity-80 text-sm mb-1">{overview.totalBalance}</p>
-              <p className="text-3xl font-bold mb-3">{formatMoney(totalBalance)} {currency.rub}</p>
-              <div className="flex items-center gap-1 text-sm opacity-80">
-                <TrendingUp size={16} />
-                <span>+12.5% за месяц</span>
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <p className="opacity-90 text-sm mb-2 font-medium">{overview.totalBalance}</p>
+                <p className="text-3xl font-bold mb-3 animate-count-up">{formatMoney(totalBalance)} {currency.rub}</p>
+                <div className="flex items-center gap-2 text-sm opacity-80">
+                  <TrendingUp size={16} />
+                  <span>+12.5% за месяц</span>
+                </div>
               </div>
+              {/* Decorative circle for depth */}
+              <div style={{
+                position: 'absolute',
+                top: '-20px',
+                right: '-20px',
+                width: '120px',
+                height: '120px',
+                background: 'rgba(255,255,255,0.1)',
+                borderRadius: '50%',
+                filter: 'blur(40px)',
+              }} />
             </div>
 
-            {/* Month Income */}
+            {/* Month Income with refined glass effect */}
             <div 
-              className="p-5 bg-white"
+              className="finance-card p-6 hover-lift animate-fade-in-up stagger-2"
               style={{ 
                 borderRadius: designTokens.borderRadius.xl,
-                boxShadow: designTokens.shadows.sm,
+                background: 'linear-gradient(to bottom right, rgba(255,255,255,0.98), rgba(249,250,251,0.95))',
               }}
             >
               <div className="flex items-center justify-between mb-3">
-                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm">{overview.monthIncome}</p>
+                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm font-medium">{overview.monthIncome}</p>
                 <div 
-                  className="p-2 rounded-lg"
-                  style={{ backgroundColor: '#dcfce7' }}
+                  className="p-2.5 rounded-lg"
+                  style={{ background: 'linear-gradient(135deg, #d4f4dd 0%, #a5e8c5 100%)' }}
                 >
                   <ArrowDownLeft size={18} style={{ color: '#16a34a' }} />
                 </div>
               </div>
               <p 
-                className="text-2xl font-bold"
+                className="text-2xl font-bold animate-count-up"
                 style={{ color: designTokens.colors.text.primary }}
               >
                 +{formatMoney(monthIncome)} {currency.rub}
               </p>
+              <div className="mt-2 flex items-center gap-1.5">
+                <div className="text-xs font-medium" style={{ color: '#059669' }}>
+                  <TrendingUp size={12} className="inline mr-1" />
+                  +8.2%
+                </div>
+                <span style={{ color: designTokens.colors.text.muted, fontSize: '12px' }}>
+                  vs прошлый месяц
+                </span>
+              </div>
             </div>
 
-            {/* Month Expenses */}
+            {/* Month Expenses with refined glass effect */}
             <div 
-              className="p-5 bg-white"
+              className="finance-card p-6 hover-lift animate-fade-in-up stagger-3"
               style={{ 
                 borderRadius: designTokens.borderRadius.xl,
-                boxShadow: designTokens.shadows.sm,
+                background: 'linear-gradient(to bottom right, rgba(255,255,255,0.98), rgba(249,250,251,0.95))',
               }}
             >
               <div className="flex items-center justify-between mb-3">
-                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm">{overview.monthExpenses}</p>
+                <p style={{ color: designTokens.colors.text.secondary }} className="text-sm font-medium">{overview.monthExpenses}</p>
                 <div 
-                  className="p-2 rounded-lg"
-                  style={{ backgroundColor: '#fee2e2' }}
+                  className="p-2.5 rounded-lg"
+                  style={{ background: 'linear-gradient(135deg, #ffd6d6 0%, #ffb3b3 100%)' }}
                 >
                   <ArrowUpRight size={18} style={{ color: '#dc2626' }} />
                 </div>
               </div>
               <p 
-                className="text-2xl font-bold"
+                className="text-2xl font-bold animate-count-up"
                 style={{ color: designTokens.colors.text.primary }}
               >
                 -{formatMoney(monthExpenses)} {currency.rub}
               </p>
+              <div className="mt-2 flex items-center gap-1.5">
+                <div className="text-xs font-medium" style={{ color: '#dc2626' }}>
+                  <TrendingUp size={12} className="inline mr-1" />
+                  -3.5%
+                </div>
+                <span style={{ color: designTokens.colors.text.muted, fontSize: '12px' }}>
+                  vs прошлый месяц
+                </span>
+              </div>
             </div>
           </div>
 
@@ -236,12 +271,11 @@ export default function Page() {
             {/* Left Column - Accounts & Budget */}
             <div className="lg:col-span-1 space-y-6">
               
-              {/* Accounts */}
+              {/* Accounts with refined styling */}
               <div 
-                className="p-5 bg-white"
+                className="finance-card p-6 animate-fade-in-up stagger-4"
                 style={{ 
                   borderRadius: designTokens.borderRadius.xl,
-                  boxShadow: designTokens.shadows.sm,
                 }}
               >
                 <div className="flex items-center justify-between mb-4">
@@ -268,8 +302,11 @@ export default function Page() {
                     return (
                       <div 
                         key={account.id}
-                        className="flex items-center justify-between p-3 rounded-lg"
-                        style={{ backgroundColor: designTokens.colors.background.muted }}
+                        className="flex items-center justify-between p-3.5 rounded-lg transition-all duration-300 hover:scale-[1.02] cursor-pointer"
+                        style={{ 
+                          background: 'linear-gradient(to right, rgba(255,255,255,0.6), rgba(249,250,251,0.4))',
+                          border: '1px solid rgba(226, 232, 240, 0.6)',
+                        }}
                       >
                         <div className="flex items-center gap-3">
                           <div 
@@ -294,12 +331,11 @@ export default function Page() {
                 </div>
               </div>
 
-              {/* Budget Progress */}
+              {/* Budget Progress with refined styling */}
               <div 
-                className="p-5 bg-white"
+                className="finance-card p-6 animate-fade-in-up stagger-5"
                 style={{ 
                   borderRadius: designTokens.borderRadius.xl,
-                  boxShadow: designTokens.shadows.sm,
                 }}
               >
                 <div className="flex items-center justify-between mb-4">
@@ -360,13 +396,12 @@ export default function Page() {
               </div>
             </div>
 
-            {/* Right Column - Transactions */}
+            {/* Right Column - Transactions with refined styling */}
             <div className="lg:col-span-2">
               <div 
-                className="p-5 bg-white h-full"
+                className="finance-card p-6 animate-fade-in-up stagger-6"
                 style={{ 
                   borderRadius: designTokens.borderRadius.xl,
-                  boxShadow: designTokens.shadows.sm,
                 }}
               >
                 <div className="flex items-center justify-between mb-4">
