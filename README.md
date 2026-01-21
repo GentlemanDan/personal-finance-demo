@@ -1,39 +1,34 @@
-> This website was generated with [PageAI](https://pageai.pro).
->
-> 1-shot production-ready websites with a design system and AI-powered content generation.
-> Get started on **[pageai.pro](https://pageai.pro)**.
+# FinTrack
 
-Vibe Coding Starter
-===================
+Приложение для управления личными финансами с интуитивным интерфейсом на русском языке.
 
-This starter was created as part of the [Vibe Coding Starter](https://pageai.pro/vibe-coding-starter-guide) tutorial.
+## Функции
 
-See the full video here:
+- 📊 Дашборд с обзором финансов
+- 💳 Управление счетами
+- 💰 Учёт транзакций (доходы/расходы)
+- 📈 Бюджетирование по категориям
+- 🎯 Финансовые цели
+- 📉 Аналитика и отчёты
 
-[![Image](https://pageai.pro/static/images/blog/vibe-coding-starter-guide.jpg)](https://www.youtube.com/watch?v=p_q7-iW606U)
-
-- [Installation](#installation)
-- [Development](#development)
-- [Build](#build)
-
-## Installation
+## Установка
 
 ```bash
-npm i
+npm install
 ```
 
-## Development
-
-First, run the development server:
+## Запуск
 
 ```bash
 npm run dev
 ```
 
-## Build
+Откройте [http://localhost:6006](http://localhost:6006)
 
-To build the site for production, run the following command:
+## Технологии
 
-```bash
-npm run build
-```
+- Next.js 15
+- React 19
+- TypeScript
+- Tailwind CSS
+- Radix UI
