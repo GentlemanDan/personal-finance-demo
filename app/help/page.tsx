@@ -13,14 +13,14 @@ export default function Help() {
           </h1>
 
           <p className="mt-6 md:text-xl">
-            Welcome to Mevolut's Help Center! We're here to assist you in making
+            Welcome to FinTrack's Help Center! We're here to assist you in making
             the most of your financial journey. Whether you're new to our
             platform or looking to optimize your experience, you've come to the
             right place.
           </p>
 
           <p className="mt-6 md:text-xl">
-            Managing your finances has never been easier. With Mevolut, you can
+            Managing your finances has never been easier. With FinTrack, you can
             effortlessly track your expenses, send money securely, and grow your
             savings—all from a simple, easy-to-use app. Our goal is to provide a
             safe and straightforward way to handle your money so you can focus

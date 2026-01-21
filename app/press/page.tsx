@@ -9,11 +9,11 @@ export default function Press() {
       <div className="w-full flex flex-col items-center my-12">
         <section className="w-full p-6 container-narrow">
           <h1 className="text-4xl font-semibold leading-tight md:leading-tight max-w-xs sm:max-w-none md:text-6xl fancy-heading">
-            Mevolut in the News
+            FinTrack in the News
           </h1>
 
           <p className="mt-6 md:text-xl">
-            At Mevolut, we're redefining the way you manage your finances. Our
+            At FinTrack, we're redefining the way you manage your finances. Our
             innovative platform simplifies expense tracking, enables seamless
             money transfers, and helps you grow your savings—all in one secure
             and user-friendly app. Discover how we're making financial

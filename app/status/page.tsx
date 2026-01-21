@@ -13,7 +13,7 @@ export default function Status() {
           </h1>
 
           <p className="mt-6 md:text-xl">
-            At Mevolut, we prioritize the availability and security of your
+            At FinTrack, we prioritize the availability and security of your
             financial tools. Our system status page provides real-time updates
             on the operational status of our platform, including services
             related to managing your money, tracking expenses, sending money,
