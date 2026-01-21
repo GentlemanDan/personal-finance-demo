@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npm run appinfo && cross-env PORT=6006 NODE_OPTIONS='--no-warnings' next dev",
     "build": "npm run appinfo && next build",
+    "start": "next start",
     "serve": "next start",
     "analyze": "cross-env ANALYZE=true next build",
     "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts",
